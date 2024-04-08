@@ -5,11 +5,16 @@ services:
     container_name: portainer
     command: -H unix:///var/run/docker.sock
     ports:
-      - 9000:9000
-      - 9443:9443
+      - 7001:9000
+      - 7443:9443
     volumes:
-      - portainer_data:/data
+      - data:/data
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
+    networks:
+      - default
 volumes:
-  portainer_data:
+  data:
+networks:
+  default:
+    name: portainer
